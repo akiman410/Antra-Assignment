@@ -17,28 +17,70 @@ FROM dbo.view_product_order_kimani
 
 DROP VIEW dbo.view_product_order_kimani
 --2.      Create a stored procedure “sp_product_order_quantity_[your_last_name]” that accept product id as an input and total quantities of order as output parameter.
-DROP PROC IF EXISTS sp_product_order_quantity_Kimani
-CREATE PROC sp_product_order_quantity_Kimani
-@ProductIDEntered INT
+CREATE PROC sp_product_order_quantity_kimani 
+@ProductID INT
 AS
 BEGIN
-SELECT o.ProductID , SUM(o.Quantity)
-FROM [Order Details] o
-WHERE o.ProductID= @ProductIDEntered 
-PRINT  SUM(o.Quantity)
+SELECT ProductID, SUM(Quantity)[Total Quantity]
+FROM [Order Details]
+WHERE ProductID = @ProductID
+GROUP BY ProductID
+PRINT @ProductID
 END
 
-EXEC  sp_product_order_quantity_Kimani
-PRINT @ProductIDEntered
+EXEC sp_product_order_quantity_kimani 23 
 
 
---3.      Create a stored procedure “sp_product_order_city_[your_last_name]” that accept product name as an input and top 5 cities that ordered most that product 
+DROP PROC sp_product_order_quantity_kimani  
+
+--3.      Create a stored procedure “sp_product_order_city_[your_last_name]” 
+--that accept product name as an input and top 5 cities that ordered most that product 
 --combined with the total quantity of that product ordered from that city as output.
+
+CREATE PROC sp_product_order_city_kimani 
+@ProductName varchar(30)
+AS 
+SELECT TOP 5 o.ShipCity, SUM(od.ProductID) AS TotalProd, SUM(od.Quantity) AS TotalQty
+FROM [Order Details] od JOIN Orders o ON o.OrderID = od.OrderID
+JOIN Products p ON p.ProductID = od.ProductID
+WHERE od.ProductID = od.ProductID
+GROUP BY o.ShipCity
+
+EXEC sp_product_order_city_kimani  chai
+
+DROP PROC sp_product_order_city_kimani 
+
 
 --4.      Create 2 new tables “people_your_last_name” “city_your_last_name”. City table has two records: {Id:1, City: Seattle}, {Id:2, City: Green Bay}. 
 --People has three records: {id:1, Name: Aaron Rodgers, City: 2}, {id:2, Name: Russell Wilson, City:1}, {Id: 3, Name: Jody Nelson, City:2}. Remove city of Seattle. 
 --If there was anyone from Seattle, put them into a new city “Madison”. Create a view “Packers_your_name” lists all people from Green Bay. 
 --If any error occurred, no changes should be made to DB. (after test) Drop both tables and view.
+
+DROP TABLE IF EXISTS people_your_kimani
+DROP TABLE IF EXISTS city_your_kimani
+
+CREATE TABLE people_your_kimani(
+id INT NOT NULL, 
+fullName NVarchar(50) NOT NULL, 
+CityID INT NOT NULL FOREIGN KEY references city_your_kimani(CityID))
+
+CREATE TABLE city_your_kimani(
+CityID INT NOT NULL PRIMARY KEY,
+cityName NVARCHAR(30) NOT NULL
+)
+
+INSERT INTO city_your_kimani VALUES (1, 'Seattle')
+INSERT INTO city_your_kimani VALUES (2, 'Green Bay')
+
+INSERT INTO people_your_kimani VALUES (1, 'Aaron Rodgers', 2)
+INSERT INTO people_your_kimani VALUES (2, 'Russell Wilson',1)
+INSERT INTO people_your_kimani VALUES (3, 'Jody Nelson', 2)
+
+Select p.id, p.fullName,p.CityID, c.cityName
+from people_your_kimani p JOIN city_your_kimani c ON p.CityID = c.CityID
+
+DROP TABLE IF EXISTS people_your_kimani
+DROP TABLE IF EXISTS city_your_kimani
 
 --5.       Create a stored procedure “sp_birthday_employees_[you_last_name]” that creates a new table “birthday_employees_your_last_name” and fill it with all employees that have a birthday on Feb. 
 --(Make a screen shot) drop the table. Employee table should not be affected.
