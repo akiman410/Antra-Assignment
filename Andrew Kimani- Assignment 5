@@ -1,0 +1,89 @@
+01 Introduction to C# and Data Types
+Understanding Data Types
+Test your knowledge 
+1.	What type would you choose for the following “numbers”? Local variables
+
+a)	A person’s telephone number - String
+b)	A person’s height - decimal
+c)	A person’s age - Int
+d)	A person’s gender (Male, Female, Prefer Not to Answer) - String
+e)	A person’s salary -decimal
+f)	A book’s ISBN - String
+g)	A book’s price - Money
+h)	A book’s shipping weight - double 
+i)	A country’s population - int
+j)	The number of stars in the universe -int 
+k)	The number of employees in each of the small or medium businesses in the United Kingdom (up to about 50,000 employees per business) - int
+
+2.	What is the difference between value type and reference type variables? What is 
+boxing and unboxing?
+  A variable of a value type contains an instance of the variable. A reference type contains a reference address to an instance of that type. Values are stored in the stack while references are stored in the heap.
+Boxing is the process of converting a value to an object or interface type. The value is wrapped inside a System.Object instance and stores it in the heap. Unboxing extracts the value from the object. 
+
+3.	What is meant by the terms managed resource and unmanaged resource in .NET
+Managed resources are resources that can be freed up by the garbage collector. Unmanage resources describes values that are not under the control of the garbage collector.
+
+4.	Whats the purpose of Garbage Collector in .NET? 
+Playing with Console App Modify your console application to display a different message. Go ahead and 
+intentionally add some mistakes to your program, so you can see what kinds of error messages you get from the compiler. The more familiar you are with these messages, and what causes them, the better you'll be at diagnosing problems in your programs that you /didn't/ intend to add!
+
+    Console.Writeline($"{a} + {b} does NOT equal {0.3}");
+
+Using just the ReadLine and WriteLine methods and your current knowledge of variables, 
+you can have the user pass in quite a few bits of information. Using this approach, create a 
+console application that asks the user a few questions and then generates some custom 
+output for them. For instance, your program could generate their "hacker name" by asking 
+them their favorite color, their astrology sign, and their street address number. The result 
+might be something like "Your hacker’s name is RedGemini480."
+Practice number sizes and ranges
+
+Console.Write("Enter your name: ");
+string name = Console.ReadLine();
+Console.Write("Your hacker's Name is, ");
+Console.Write(name);
+
+
+5.	Create a console application project named /02 UnderstandingTypes/ that outputs the 
+number of bytes in memory that each of the following number types uses, and the minimum and maximum values they can have: sbyte, byte, short, ushort, int, uint, long,  ulong, float, double, and decimal. 
+
+//Console.WriteLine("Hello, World!");
+
+Console.WriteLine($"bool = {default(bool)} store numbers in the range {int.MinValue:N0} to {int.MaxValue:N0}");
+Console.WriteLine($"DateTime = {default(DateTime)} store numbers in the range {int.MinValue:N0} to {int.MaxValue:N0}");
+Console.WriteLine($"sbyte = {default(sbyte)} store numbers in the range {sbyte.MinValue:N0} to {sbyte.MaxValue:N0}");
+Console.WriteLine($"byte = {default(byte)} store numbers in the range {byte.MinValue:N0} to {byte.MaxValue:N0}");
+Console.WriteLine($"short = {default(short)} store numbers in the range {short.MinValue:N0} to {short.MaxValue:N0}");
+Console.WriteLine($"ushort = {default(ushort)} store numbers in the range {ushort.MinValue:N0} to {ushort.MaxValue:N0}");
+Console.WriteLine($"int = {default(int)} store numbers in the range {int.MinValue:N0} to {int.MaxValue:N0}");
+Console.WriteLine($"uint = {default(uint)} store numbers in the range {uint.MinValue:N0} to {uint.MaxValue:N0}");
+Console.WriteLine($"long = {default(long)} store numbers in the range {long.MinValue:N0} to {long.MaxValue:N0}");
+Console.WriteLine($"ulong = {default(ulong)} store numbers in the range {ulong.MinValue:N0} to {ulong.MaxValue:N0}");
+Console.WriteLine($"float = {default(float)} store numbers in the range {float.MinValue:N0} to {float.MaxValue:N0}");
+Console.WriteLine($"double = {default(double)} store numbers in the range {double.MinValue:N0} to {double.MaxValue:N0}");
+Console.WriteLine($"decimal = {default(decimal)} store numbers in the range {decimal.MinValue:N0} to {decimal.MaxValue:N0}");
+
+
+6.	Write program to enter an integer number of centuries and convert it to years, days, hours, 
+minutes, seconds, milliseconds, microseconds, nanoseconds
+
+.  Use an appropriate data type for every data conversion. Beware of overflows!
+Input: 1
+Output: 1 centuries = 100 years = 36524 days = 876576 hours = 52594560 minutes 
+= 3155673600 seconds = 3155673600000 milliseconds = 3155673600000000 
+microseconds = 3155673600000000000 nanoseconds
+
+Input: 5
+Output: 5 centuries = 500 years = 182621 days = 4382904 hours = 262974240 
+minutes = 15778454400 seconds = 15778454400000 milliseconds = 15778454400000000 
+microseconds = 15778454400000000000 nanoseconds
+
+Test your Knowledge
+1. What happens when you divide an int variable by 0? 
+2. What happens when you divide a double variable by 0? 
+3. What happens when you overflow an int variable, that is, set it to a value beyond its 
+range? 
+4. What is the difference between x = y++; and x = ++y;? 
+5. What is the difference between break, continue, and return when used inside a loop 
+statement? 
+6. What are the three parts of a for statement and which of them are required? 
+
